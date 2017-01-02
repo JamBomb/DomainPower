@@ -1,0 +1,10 @@
+1482459510	172.29.132.67	C	wiki:protocol:lag_vs_ecmp	root	created		8204
+1482459532	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			-6
+1482459564	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			-5
+1482462775	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			43
+1482462857	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			16
+1482462918	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			-19
+1482462952	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			-2
+1482463074	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			-38
+1482805033	127.0.0.1	E	wiki:protocol:lag_vs_ecmp		external edit		15
+1482902975	172.29.132.67	E	wiki:protocol:lag_vs_ecmp	root			-14

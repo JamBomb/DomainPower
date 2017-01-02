@@ -1,0 +1,13 @@
+Install cmake
+
+----
+step1: copy cmake to mTera dir and enter this cmake directory.
+
+step2: make & install cmake
+   mkdir /opt/cmake
+   ./bootstrap --prefix=/opt/cmake
+   make & make install
+
+----
+Have a good lucky :-)
+

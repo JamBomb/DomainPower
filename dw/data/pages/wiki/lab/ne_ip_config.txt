@@ -1,0 +1,14 @@
+NE IP Configure
+
+----
+At NE main control card (normally serial port slot-24):
+
+system FC
+
+nma edlci addr=172.29.97.101 mask=255.255.255.0 gtw=172.29.97.1
+
+ping 172.29.97.1 
+
+----
+
+Have a good lucky! :-O

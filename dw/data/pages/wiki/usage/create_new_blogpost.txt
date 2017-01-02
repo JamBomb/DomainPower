@@ -1,0 +1,7 @@
+test it！LOL
+
+<?php 
+ 
+phpinfo();
+  
+?>

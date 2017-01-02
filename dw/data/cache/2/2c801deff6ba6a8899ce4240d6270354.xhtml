@@ -1,0 +1,171 @@
+
+<p>
+<a href="http://blog.ipspace.net/2014/10/lag-versus-ecmp.html" class="urlextern" title="http://blog.ipspace.net/2014/10/lag-versus-ecmp.html" rel="nofollow">LAG VERSUS ECMP</a> <br/>
+
+<span>
+By Ivan Pepelnjak Click here to subscribe to my SDN mailing list
+
+
+Monday, October 06, 2014
+
+Bryan sent me an interesting question:
+
+When you have the opportunity to use LAG or ECMP, what are some things you should consider?
+He already gathered some ideas (thank you!) and I expanded his list and added a few comments.
+
+Purpose: resiliency or more bandwidth? For resiliency you want fast failure detection and the ability to connect to multiple uplink devices, for more bandwidth, you want better hashing.
+
+Failure detection: LAG uses LACP to detect link failures, and assuming your LAG implementation supports fast LACP timers, you can detect link failures in three seconds. ECMP uses routing protocol hello mechanisms (which you can tune to sub-second convergence) or BFD.
+
+Scalability: Adding more IP links might increase the size of the OSPF link state database (or not, if you use IPv6 link local addresses or OSPF knobs that don’t propagate transit subnets in router LSAs).
+
+ECMP usually increases the size of the IP routing table and forwarding tables, which might cause problems in some data center switches with pretty low IPv4 and IPv6 forwarding tables. Some vendors might be smart enough to use next-hop groups (available in most switching silicon these days) for ECMP purposes; not sure whether anyone does – please do write a comment if you know more.
+
+On the other hand, you might get multiple ARP entries for a single IP adjacency (toward a router or a host) over a LAG in forwarding architectures that include outgoing physical interface in the ARP entry. In these scenarios you might run out of ARP/ND entries.
+
+Load balancing algorithm: usually not an issue. Platforms that support 5-tuple load balancing across a LAG usually support it over ECMP and vice versa. There might be exceptions that drove you mad – write a comment and list the offenders.
+
+Redundant designs: It’s trivial to implement a design connecting an edge (leaf) switch to two core (spine) switches with ECMP. Doing the same thing with LAG involves MLAG, which is always proprietary (because there’s no MLAG standard) and somewhat clumsy.
+
+Using more than two spine switches in a layer-2-only fabric forces you to use TRILL/SPB or any number of proprietary layer-2 fabric solutions (example: FabricPath, VCS Fabric…). I&#039;d rather stay with ECMP; it&#039;s been working for the last 20 years.
+
+Anything else? Write a comment!
+
+More information
+
+Speaking of leafs and spines – you’ll find numerous L2/L3 designs in my Leaf-and-Spine Fabric Architectures webinar. Worried about forwarding table sizes of popular data center switches? Check out the Data Center Fabric Architectures webinar (or get access to both of them and dozens more with the subscription). We can also discuss your design and implementation challenges in an ExpertExpress session.
+
+Tags: IP routing, Link aggregation Email ThisBlogThis!Share to TwitterShare to Facebook
+RELATED POSTS BY CATEGORIES
+
+
+
+17 COMMENTS:
+
+
+Ofer06 October, 2014 10:09
+Hi Ivan,
+
+- LAG has means to utilise BFD. draft-mmm-bfd-on-lags is one of them…
+- LAG has some finer control over its members with things like setting a threshold of active members before failing the whole bundle (AKA minimum-links)
+- LAG work across same-speed members (1g/10g/etc) whereas ECMP doesn&#039;t have this requirement
+- in more general note. LAG w/ LACP is stateful (from the LAG POV, not the the member POV). ECMP is stateless in this sense. hence, adding/removing links from a LAG is communicated to the other end.
+ReplyDelete
+Replies
+
+Ivan Pepelnjak06 October, 2014 12:47
+Hi Ofer,
+
+* BFD-over-LAG: any implementations you&#039;re aware of out there?
+
+* ECMP over non equal-speed members - don&#039;t do it unless you&#039;re absolutely sure about what you&#039;re doing and why (not to mention that you&#039;d need to tweak routing protocol metrics to get it to work).
+
+* You could also claim that ECMP is stateful - after all, the addition/removal of links is signaled through routing protocols ;)
+
+Delete
+
+WildSubnet06 October, 2014 17:14
+Juniper calls it micro-bfd and it is supported starting with Junos 13.3.
+
+<a href="http://www.juniper.net/documentation/en_US/junos13.3/topics/concept/bfd-for-lag-overview.html" class="urlextern" title="http://www.juniper.net/documentation/en_US/junos13.3/topics/concept/bfd-for-lag-overview.html" rel="nofollow">http://www.juniper.net/documentation/en_US/junos13.3/topics/concept/bfd-for-lag-overview.html</a>
+
+Delete
+
+Walter De Smedt14 October, 2014 19:42
+- Alcatel-Lucent&#039;s 7&times;50 routers have BFD for LAG since last year (11.0R5)
+- multi-speed LAG is also supported since this year, mixing 10/100GE in a single lag, there is no need for tweaking routing protocols. the 100GE links just get a &#039;weight&#039; x10 in the hashing algorithm. Useful if you want to grow expensive BW granularly
+- LAG vs. ECMP: next to the obvious IGP scaling issue with <em> IP links,LAG supports fate-sharing between member-links using port-thresholds (LAG fails if min nr of member-links fail) - useful to avoid congestion. Not trivial with ECMP over IP links
+
+Delete
+Reply
+
+Anonymous06 October, 2014 13:26
+LAG failure detection:
+1. There is a <abbr title="Request for Comments">RFC</abbr> <a href="http://tools.ietf.org/html/rfc7130" class="urlextern" title="http://tools.ietf.org/html/rfc7130" rel="nofollow">http://tools.ietf.org/html/rfc7130</a> BFD for LAG.
+2. As i understand, Cisco Nexus can implement BFD for LAG. IOS will create BFD session for each link. <a href="http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5500/sw/interfaces/6x/b_5500_Interfaces_Config_Guide_Release_6x/b_5500_Interfaces_Config_Guide_Release_6x_chapter_0110.html#concept_0B1573CB2DE248338D6EF32C62FC904D" class="urlextern" title="http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5500/sw/interfaces/6x/b_5500_Interfaces_Config_Guide_Release_6x/b_5500_Interfaces_Config_Guide_Release_6x_chapter_0110.html#concept_0B1573CB2DE248338D6EF32C62FC904D" rel="nofollow">http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5500/sw/interfaces/6x/b_5500_Interfaces_Config_Guide_Release_6x/b_5500_Interfaces_Config_Guide_Release_6x_chapter_0110.html#concept_0B1573CB2DE248338D6EF32C62FC904D</a>
+3. Also, you can configure Single-hop BFD session and associate it with interface status.
+
+Load balance:
+The main problem is to load balance fat L2VPN in service provider network.
+1. There is a “Flow-Aware Transport of Pseudowires over an MPLS Packet Switched Network” rfc6391 for ECMP
+2. And for LAG “The Use of Entropy Labels in MPLS Forwarding” rfc6790 can be used. 
+3. Also, some high-end devices can “look” inside L2VPN and load-balance traffic using customer SMAC/DMAC/SIP/DIP for LAG load-balancing.
+
+P.S. Price for 100GE interfaces getting lower each year :)
+
+ReplyDelete
+
+Bhargav06 October, 2014 16:06
+ECMP provides better control of traffic than LAG. For example, it is easy to implement TE using say PBR with ECMP than with LAG.
+
+ReplyDelete
+
+Steven iveson06 October, 2014 22:22
+I wonder, using either, does the hashing/balancing adjust if one link becomes 100% utilised and the other has spare capacity?
+
+ReplyDelete
+Replies
+
+Ivan Pepelnjak07 October, 2014 07:58
+That would be ideal, but I don&#039;t think many switches do that.
+
+Delete
+
+reggle07 October, 2014 07:59
+I haven&#039;t encountered any product that will. Hashing is done in hardware so software doesn&#039;t actively look at it.
+
+Delete
+
+Anonymous07 October, 2014 14:45
+Will not this move a flow from one link to another and hence packet re-order ?
+
+Delete
+
+Ivan Pepelnjak07 October, 2014 15:37
+You have to be careful - move the flow bucket when it&#039;s idle (search for “flowlets” for more details).
+
+Delete
+
+Anonymous08 October, 2014 11:40
+Juniper&#039;s MX routers implement adaptive load balancing for LAGs based on periodic monitoring of load on LAG members:
+<a href="http://www.juniper.net/documentation/en_US/junos13.3/topics/concept/load-balance-technique-overview.html" class="urlextern" title="http://www.juniper.net/documentation/en_US/junos13.3/topics/concept/load-balance-technique-overview.html" rel="nofollow">http://www.juniper.net/documentation/en_US/junos13.3/topics/concept/load-balance-technique-overview.html</a>
+
+Packet re-ordering is an issue only if it is persistent. Protocols and applications are typically resilient to an occasional reordered packet.
+
+Delete
+Reply
+
+Johannes07 October, 2014 09:00
+Under failure detection I would also mention, that there are direct link failures as well (and I guess these are more common). Then BFD routing protocol timers or (fast) LACP are not relevant any more.
+
+ReplyDelete
+
+Anonymous07 October, 2014 09:51
+Hi - 
+
+How about ECMP using layer-3 LAGs ? Does that provide the most options for failure detection?
+
+Thanks,
+
+ReplyDelete
+
+Will Hogan14 October, 2014 08:20
+I prefer ECMP over lag. So much easier to configure a lag than 1000 ecmp links.
+
+ReplyDelete
+
+DuaneO17 October, 2014 17:17
+We needed to include SRLG to get ECMP to the same ~feature set as LAG (w XR fast LACP hellos or per member bfd).
+
+ReplyDelete
+
+Nedsky30 September, 2015 18:10
+considering qos (llq, cbwfq, wred) - is it easier on LAG or ECMP?
+
+ReplyDelete
+Add comment
+Load more…
+You don&#039;t have to log in to post a comment, but please do provide your real name/<abbr title="Uniform Resource Locator">URL</abbr>. Anonymous comments might get deleted.
+
+&lt;/wrap&gt;
+</p>

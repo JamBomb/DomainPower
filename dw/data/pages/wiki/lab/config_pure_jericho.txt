@@ -1,0 +1,47 @@
+config_pure_jericho
+-----------
+
+1、在console下，重启板卡，等待出现Type "uboot" to stop autoboot:输入uboot进入到uboot，再输入run applinux系统进入linux shell 模式下，等待启动完成。 
+   FM1@DTSEC1, FM1@DTSEC2 
+   Type "uboot" to stop autoboot: 
+   => run applinux
+
+2、在linux shell下建立软连接
+   osm4f_20_8#cd /usr/lib 
+   mv libBcm.so libBcm.so.org 
+   osm4f_20_8#mv libBcm.so libBcm.so.org 
+   osm4f_20_8#ln -s /mnt/sdcard/lkk/libBcm.so.dbg libBcm.so
+   osm4f_20_8#cd /usr/local/bin
+   osm4f_20_8#rm -f HALServer.out
+   osm4f_20_8#ln -s /mnt/sdcard/lkk/HALServer.out HALServer.out
+3、运行脚本
+   osm4f_20_8#export APPMODE=APP
+   osm4f_20_8#cd /usr/local/bin
+   osm4f_20_8#./intfinit.sh 
+4、gdb 启动HAL server, 等待出现(gdb) 增加调试断点
+   osm4f_20_8#dtach -c /tmp/dtach-HAL gdb HALServer.out
+   GNU gdb (Wind River Linux Sourcery CodeBench 4.6a-99) 7.4.50.20120716-cvs
+   Copyright (C) 2012 Free Software Foundation, Inc.
+   License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+   This is free software: you are free to change and redistribute it.
+   There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+   and "show warranty" for details.
+   This GDB was configured as "powerpc-wrs-linux-gnu".
+   For bug reporting instructions, please see:
+   <support@windriver.com>...
+   Reading symbols from /usr/local/bin/HALServer.out...done.
+   (gdb) set print pretty on
+   (gdb) set print object on
+   (gdb) set print static-members on
+   (gdb) set print vtbl on
+   (gdb) set print demangle on
+   (gdb) set demangle-style gnu-v3
+   (gdb) set print sevenbit-strings off
+   (gdb) set pagination off
+   (gdb) set print elements 0
+5、增加完断点后进行继续启动
+   (gdb) run -noapp cold tcl -debug  
+
+--------------
+
+have a good lucky ;-)

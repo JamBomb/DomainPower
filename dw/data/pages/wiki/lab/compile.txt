@@ -1,0 +1,39 @@
+
+1. prepare:
+   create softe links at root directory for vobs and env.sh (like below config)
+     cd /
+     ln -s /home/workspace/mTera5/vobs
+     ln -s /home/workspace    
+2. compile enviroment:
+   cd /workspace
+   source env.bash
+   cd /vobs/ots/development
+   csh
+   source envqoriq50.csh
+
+3. compile line card:
+   libs:
+   cd /vobs/ots/development/proj/
+   make libs
+
+   osm2 image:
+   cd /vobs/ots/osm2/proj/
+   make
+
+   osm4 image:
+   cd /vobs/ots/osm4/proj/
+   make
+   
+   osm4 HalServer:
+   cd /vobs/ots/osm4/Apps/HalServer/proj 
+   make 
+
+4. compile BCM lib.so:
+  cd /vobs/ots/broadcom/BCM_SDK_6.4.11/sdk-all 
+  source env_tlabduneqoriq50.csh -u 
+  mkdir -p /vobs/ots/broadcom/BCM_SDK_6.4.11/sdk-all/build/linux/user/$platform 
+  cd /vobs/ots/broadcom/BCM_SDK_6.4.11/sdk-all/systems/linux/user/tlabduneqoriq50-2_6 
+  make bcm 
+  gmake bcm 
+  cd /vobs/ots/broadcom/BCM_SDK_6.4.11/sdk-all/systems/linux/user/tlabduneqoriq50-2_6 
+  gmake export 

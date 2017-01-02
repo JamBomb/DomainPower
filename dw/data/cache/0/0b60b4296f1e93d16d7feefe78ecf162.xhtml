@@ -1,0 +1,54 @@
+
+<p>
+mount_image
+</p>
+<hr />
+<pre class="code">losetup /dev/loop4 /mnt/sdcard/tlabp204x/images/tellabs.img
+mkdir -p /mnt/img
+mount /dev/loop4 /mnt/img
+  </pre>
+
+<p>
+HALServer image
+</p>
+<pre class="code">rm /usr/local/bin/HALServer.out
+ln -s /mnt/sdcard/lkk/HALServer.out ~/HALServer.out
+cp -d ~/HALServer.out /mnt/img/usr/local/bin/HALServer.out</pre>
+
+<p>
+BCM Lib so
+</p>
+<pre class="code">rm /mnt/img/usr/lib/libBcm.so
+ln -s /mnt/sdcard/lkk/libBcm.so.dbg  ~/libBcm.so
+cp -d ~/libBcm.so /mnt/img/usr/lib/libBcm.so</pre>
+
+<p>
+Jer.soc  
+</p>
+<pre class="code">rm /usr/local/bin/jer.soc
+ln -s /mnt/sdcard/lkk/jer.soc ~/jer.soc
+cp -d ~/jer.soc /mnt/img/usr/local/bin/jer.soc  </pre>
+
+<p>
+config.bcm
+</p>
+<pre class="code">rm /usr/local/bin/config.bcm
+ln -s /mnt/sdcard/lkk/config.bcm ~/config.bcm
+cp -d ~/config.bcm /mnt/img/usr/local/bin/config.bcm</pre>
+
+<p>
+PTS image  
+</p>
+<pre class="code">rm /usr/local/bin/PTSapp.out
+ln -s /mnt/sdcard/lkk/PTSapp.out ~/PTSapp.out
+cp -d ~/PTSapp.out /mnt/img/usr/local/bin/PTSapp.out</pre>
+
+<p>
+Sync  
+</p>
+<pre class="code">sync</pre>
+
+<p>
+—-
+have a good lucky <img src="/dw/lib/images/smileys/icon_fun.gif" class="icon" alt="^_^" />
+</p>

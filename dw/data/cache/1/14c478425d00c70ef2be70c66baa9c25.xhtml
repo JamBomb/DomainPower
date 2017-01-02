@@ -1,0 +1,30 @@
+
+<p>
+BC NE MANUALLY
+</p>
+<hr />
+
+<p>
+step 0: shutdown cold
+</p>
+
+<p>
+step1: enter: uboot
+</p>
+
+<p>
+step2: run bcmode 
+</p>
+
+<p>
+step3: mkdir /mnt/flashdisk &amp;&amp; mount -t jffs2 -o rw,noatime /dev/mtdblock1 /mnt/flashdisk &amp;&amp; cd /mnt/flashdisk &amp;&amp; ./bcm.init &amp;&amp; ./ed_ip 172.29.97.101 255.255.255.0 LCI 172.29.97.1 
+</p>
+
+<p>
+step4: ./copy_rfile <code><strong>172.29.22.220 21 FtpUserName FtpPassword mTera MT5_0_0_KM029_20161214_MTERA</strong></code> &amp;&amp; ./install_sw &amp;&amp; ./init_sys
+</p>
+<hr />
+
+<p>
+<img src="/dw/lib/images/smileys/icon_cool.gif" class="icon" alt="8-)" /> Have a good lucky!
+</p>

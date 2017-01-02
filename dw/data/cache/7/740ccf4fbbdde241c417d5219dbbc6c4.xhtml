@@ -1,0 +1,64 @@
+
+<p>
+config_pure_jericho
+</p>
+<hr />
+
+<p>
+1、在console下，重启板卡，等待出现Type “uboot” to stop autoboot:输入uboot进入到uboot，再输入run applinux系统进入linux shell 模式下，等待启动完成。 
+</p>
+<pre class="code"> FM1@DTSEC1, FM1@DTSEC2 
+ Type &quot;uboot&quot; to stop autoboot: 
+ =&gt; run applinux</pre>
+
+<p>
+2、在linux shell下建立软连接
+</p>
+<pre class="code"> osm4f_20_8#cd /usr/lib 
+ mv libBcm.so libBcm.so.org 
+ osm4f_20_8#mv libBcm.so libBcm.so.org 
+ osm4f_20_8#ln -s /mnt/sdcard/lkk/libBcm.so.dbg libBcm.so
+ osm4f_20_8#cd /usr/local/bin
+ osm4f_20_8#rm -f HALServer.out
+ osm4f_20_8#ln -s /mnt/sdcard/lkk/HALServer.out HALServer.out</pre>
+
+<p>
+3、运行脚本
+</p>
+<pre class="code"> osm4f_20_8#export APPMODE=APP
+ osm4f_20_8#cd /usr/local/bin
+ osm4f_20_8#./intfinit.sh </pre>
+
+<p>
+4、gdb 启动HAL server, 等待出现(gdb) 增加调试断点
+</p>
+<pre class="code"> osm4f_20_8#dtach -c /tmp/dtach-HAL gdb HALServer.out
+ GNU gdb (Wind River Linux Sourcery CodeBench 4.6a-99) 7.4.50.20120716-cvs
+ Copyright (C) 2012 Free Software Foundation, Inc.
+ License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+ This is free software: you are free to change and redistribute it.
+ There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;
+ and &quot;show warranty&quot; for details.
+ This GDB was configured as &quot;powerpc-wrs-linux-gnu&quot;.
+ For bug reporting instructions, please see:
+ &lt;support@windriver.com&gt;...
+ Reading symbols from /usr/local/bin/HALServer.out...done.
+ (gdb) set print pretty on
+ (gdb) set print object on
+ (gdb) set print static-members on
+ (gdb) set print vtbl on
+ (gdb) set print demangle on
+ (gdb) set demangle-style gnu-v3
+ (gdb) set print sevenbit-strings off
+ (gdb) set pagination off
+ (gdb) set print elements 0</pre>
+
+<p>
+5、增加完断点后进行继续启动
+</p>
+<pre class="code"> (gdb) run -noapp cold tcl -debug  </pre>
+<hr />
+
+<p>
+have a good lucky <img src="/dw/lib/images/smileys/icon_wink.gif" class="icon" alt=";-)" />
+</p>

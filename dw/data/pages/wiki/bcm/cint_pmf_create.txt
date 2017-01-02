@@ -1,0 +1,34 @@
+PMF: Create  Group and Entry in BCM cint
+-----
+
+  
+  int unit = 0;
+  int group_priority = 1;
+  bcm_field_qset_t qset;
+  bcm_field_aset_t aset;
+  bcm_field_group_t grp = 1;
+  bcm_field_entry_t ent;
+  
+  BCM_FIELD_QSET_INIT(qset);
+  BCM_FIELD_QSET_ADD(qset, bcmFieldQualifyStageIngress);
+  BCM_FIELD_QSET_ADD(qset, bcmFieldQualifyForwardingType);
+  BCM_FIELD_QSET_ADD(qset, bcmFieldQualifyTunnelType);
+  BCM_FIELD_QSET_ADD(qset, bcmFieldQualifyIpProtocolCommon);
+  
+  BCM_FIELD_ASET_INIT(aset);
+  BCM_FIELD_ASET_ADD(aset, bcmFieldActionForwardingTypeNew);
+  
+  print  bcm_field_group_create_id(unit, qset, group_priority, grp);
+  print  bcm_field_group_action_set(unit, grp, aset);
+  
+  print  bcm_field_entry_create(unit, grp, &ent);
+  print  bcm_field_qualify_ForwardingType(unit, ent, bcmFieldForwardingTypeL3);
+  print  bcm_field_qualify_IpProtocolCommon(unit, ent, bcmFieldIpProtocolCommonIpInIp);
+  print  bcm_field_qualify_TunnelType(unit, ent, bcmFieldTunnelTypeIp);
+  print  bcm_field_action_add(unit, ent, bcmFieldActionForwardingTypeNew, bcmFieldForwardingTypeIp4Ucast, 3 );
+  
+  print  bcm_field_group_install(unit, grp);
+  bcm_field_group_dump(0,1);
+  
+  ----
+Have a good lucky FIXME

@@ -1,0 +1,31 @@
+mount_image
+----
+
+  losetup /dev/loop4 /mnt/sdcard/tlabp204x/images/tellabs.img
+  mkdir -p /mnt/img
+  mount /dev/loop4 /mnt/img
+    
+HALServer image
+  rm /usr/local/bin/HALServer.out
+  ln -s /mnt/sdcard/lkk/HALServer.out ~/HALServer.out
+  cp -d ~/HALServer.out /mnt/img/usr/local/bin/HALServer.out
+BCM Lib so
+  rm /mnt/img/usr/lib/libBcm.so
+  ln -s /mnt/sdcard/lkk/libBcm.so.dbg  ~/libBcm.so
+  cp -d ~/libBcm.so /mnt/img/usr/lib/libBcm.so
+Jer.soc  
+  rm /usr/local/bin/jer.soc
+  ln -s /mnt/sdcard/lkk/jer.soc ~/jer.soc
+  cp -d ~/jer.soc /mnt/img/usr/local/bin/jer.soc  
+config.bcm
+  rm /usr/local/bin/config.bcm
+  ln -s /mnt/sdcard/lkk/config.bcm ~/config.bcm
+  cp -d ~/config.bcm /mnt/img/usr/local/bin/config.bcm
+PTS image  
+  rm /usr/local/bin/PTSapp.out
+  ln -s /mnt/sdcard/lkk/PTSapp.out ~/PTSapp.out
+  cp -d ~/PTSapp.out /mnt/img/usr/local/bin/PTSapp.out
+Sync  
+  sync
+----
+have a good lucky ^_^

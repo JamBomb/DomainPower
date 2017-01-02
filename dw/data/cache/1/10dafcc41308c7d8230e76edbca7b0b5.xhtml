@@ -1,0 +1,42 @@
+
+<p>
+mount_image
+</p>
+<hr />
+
+<p>
+losetup /dev/loop4 /mnt/sdcard/tlabp204x/images/tellabs.img
+</p>
+
+<p>
+mkdir -p /mnt/img
+</p>
+
+<p>
+mount /dev/loop4 /mnt/img
+</p>
+
+<p>
+cd /mnt/sdcard
+</p>
+
+<p>
+rm /usr/local/bin/HALServer.out
+</p>
+
+<p>
+ln -s /mnt/sdcard/lkk/HALServer.out ~/HALServer.out
+</p>
+
+<p>
+cp -d ~/HALServer.out /mnt/img/usr/local/bin/HALServer.out
+</p>
+
+<p>
+sync
+</p>
+<hr />
+
+<p>
+have a good lucky <img src="/dw/lib/images/smileys/icon_fun.gif" class="icon" alt="^_^" />
+</p>

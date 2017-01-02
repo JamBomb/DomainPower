@@ -1,0 +1,12 @@
+a:30:{i:0;a:3:{i:0;s:14:"document_start";i:1;a:0:{}i:2;i:0;}i:1;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:0;}i:2;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:49:"Git 如何Check Out出指定文件或者文件夹";}i:2;i:1;}i:3;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:50;}i:4;a:3:{i:0;s:2:"hr";i:1;a:0:{}i:2;i:50;}i:5;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:50;}i:6;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:611:"主题 Git Linux
+在进行项目开发的时候，有时候会有这样的需求那就是：我们只希望从Git仓库里取指定的文件或者文件夹出来。在SVN里面，这非常容易实现，因为SVN基于文件方式存储，而Git却是基于元数据方式分布式存储文件信息的，它会在每一次Clone的时候将所有信息都取回到本地，即相当于在你的机器上生成一个克隆版的版本库。因此在Git1.7.0以前，这无法实现，但是幸运的是在Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或者文件夹成为可能。";}i:2;i:57;}i:7;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:668;}i:8;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:668;}i:9;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:21:"具体实现如下：";}i:2;i:670;}i:10;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:691;}i:11;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:691;}i:12;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:271:"$mkdir project_folder
+$cd project_folder
+$git init
+$git remote add -f origin <url>
+上面的代码会帮助你创建一个空的本地仓库，同时将远程Git Server URL加入到Git Config文件中。 
+接下来，我们在Config中允许使用Sparse Checkout模式：";}i:2;i:693;}i:13;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:964;}i:14;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:964;}i:15;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:214:"$git config core.sparsecheckout true
+接下来你需要告诉Git哪些文件或者文件夹是你真正想Check Out的，你可以将它们作为一个列表保存在.git/info/sparse-checkout文件中。 
+例如：";}i:2;i:966;}i:16;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:1180;}i:17;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:1180;}i:18;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:17:"$echo “libs” ";}i:2;i:1182;}i:19;a:3:{i:0;s:6:"entity";i:1;a:1:{i:0;s:2:">>";}i:2;i:1199;}i:20;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:56:" .git/info/sparse-checkout
+$echo “apps/register.go” ";}i:2;i:1201;}i:21;a:3:{i:0;s:6:"entity";i:1;a:1:{i:0;s:2:">>";}i:2;i:1257;}i:22;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:52:" .git/info/sparse-checkout
+$echo “resource/css” ";}i:2;i:1259;}i:23;a:3:{i:0;s:6:"entity";i:1;a:1:{i:0;s:2:">>";}i:2;i:1311;}i:24;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:123:" .git/info/sparse-checkout
+最后，你只要以正常方式从你想要的分支中将你的项目拉下来就可以了：";}i:2;i:1313;}i:25;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:1436;}i:26;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:1436;}i:27;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:23:"$git pull origin master";}i:2;i:1438;}i:28;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:1438;}i:29;a:3:{i:0;s:12:"document_end";i:1;a:0:{}i:2;i:1438;}}

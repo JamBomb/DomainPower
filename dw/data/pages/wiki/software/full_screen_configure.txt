@@ -1,0 +1,10 @@
+虚拟机VirtualBox中Centos无法全屏解决方法
+----
+
+解决方法：
+  -   在VirtualBox菜单栏中选择【设备】->【安装增强功能】
+  -   在Centos系统中选择【VBOXADDITIONS】(该光驱的名称可能不一样)
+  -   点击【打开自动运行提示】，自动安装完成后，会有英文提示“按下回车关闭窗口”，按回车就好了。
+
+-----
+Have a good lucky LOL

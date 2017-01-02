@@ -1,0 +1,22 @@
+NE TL1 Command
+
+----
+''**log in:**''
+
+ "telnet neip:3083" or 
+
+ "ssh neip" and input "telnet 0 3083"
+
+ ACT-USER::Admin1:100::1Transport! 
+
+''**Retrive all:**''
+ 
+ "rtrv-cond-all:::ct;"
+
+ "RTRV-EQPT::ALL:100;"
+
+
+
+
+----
+Have a good lucky :-o

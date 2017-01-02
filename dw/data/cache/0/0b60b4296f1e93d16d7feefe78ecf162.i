@@ -1,0 +1,15 @@
+a:36:{i:0;a:3:{i:0;s:14:"document_start";i:1;a:0:{}i:2;i:0;}i:1;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:0;}i:2;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:11:"mount_image";}i:2;i:1;}i:3;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:12;}i:4;a:3:{i:0;s:2:"hr";i:1;a:0:{}i:2;i:12;}i:5;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:106:"losetup /dev/loop4 /mnt/sdcard/tlabp204x/images/tellabs.img
+mkdir -p /mnt/img
+mount /dev/loop4 /mnt/img
+  ";}i:2;i:18;}i:6;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:18;}i:7;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:15:"HALServer image";}i:2;i:134;}i:8;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:149;}i:9;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:142:"rm /usr/local/bin/HALServer.out
+ln -s /mnt/sdcard/lkk/HALServer.out ~/HALServer.out
+cp -d ~/HALServer.out /mnt/img/usr/local/bin/HALServer.out";}i:2;i:149;}i:10;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:149;}i:11;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:10:"BCM Lib so";}i:2;i:299;}i:12;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:309;}i:13;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:123:"rm /mnt/img/usr/lib/libBcm.so
+ln -s /mnt/sdcard/lkk/libBcm.so.dbg  ~/libBcm.so
+cp -d ~/libBcm.so /mnt/img/usr/lib/libBcm.so";}i:2;i:309;}i:14;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:309;}i:15;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:9:"Jer.soc  ";}i:2;i:440;}i:16;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:449;}i:17;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:114:"rm /usr/local/bin/jer.soc
+ln -s /mnt/sdcard/lkk/jer.soc ~/jer.soc
+cp -d ~/jer.soc /mnt/img/usr/local/bin/jer.soc  ";}i:2;i:449;}i:18;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:449;}i:19;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:10:"config.bcm";}i:2;i:571;}i:20;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:581;}i:21;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:127:"rm /usr/local/bin/config.bcm
+ln -s /mnt/sdcard/lkk/config.bcm ~/config.bcm
+cp -d ~/config.bcm /mnt/img/usr/local/bin/config.bcm";}i:2;i:581;}i:22;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:581;}i:23;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:11:"PTS image  ";}i:2;i:716;}i:24;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:727;}i:25;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:127:"rm /usr/local/bin/PTSapp.out
+ln -s /mnt/sdcard/lkk/PTSapp.out ~/PTSapp.out
+cp -d ~/PTSapp.out /mnt/img/usr/local/bin/PTSapp.out";}i:2;i:727;}i:26;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:727;}i:27;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:6:"Sync  ";}i:2;i:862;}i:28;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:868;}i:29;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:4:"sync";}i:2;i:868;}i:30;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:868;}i:31;a:3:{i:0;s:6:"entity";i:1;a:1:{i:0;s:3:"---";}i:2;i:876;}i:32;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:20:"-
+have a good lucky ";}i:2;i:879;}i:33;a:3:{i:0;s:6:"smiley";i:1;a:1:{i:0;s:3:"^_^";}i:2;i:899;}i:34;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:902;}i:35;a:3:{i:0;s:12:"document_end";i:1;a:0:{}i:2;i:902;}}

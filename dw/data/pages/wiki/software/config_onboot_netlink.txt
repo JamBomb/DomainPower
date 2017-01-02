@@ -1,0 +1,13 @@
+Centos7: Open Netlink at onboot 
+----
+
+1.进入目录/etc/sysconfig/network-scripts/
+
+
+2.修改ifcfg-enxxxxxxxx 文件   (即你的网卡标识命名的配置文件)
+
+
+3.将ONBOOT=no改成yes
+
+
+4.保存后重启即可

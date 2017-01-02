@@ -1,0 +1,18 @@
+====== PlayGround ======
+<html>
+这是 <font color="red" size="+1">HTML</font> 代码。
+</html>
+<code cpp>
+class abc
+{
+private:
+int a;
+public:
+int b;
+
+};
+</code>
+
+ [[wiki:lab:compile|lab]]。
+<note>note</note>
+~~DISCUSSION|PlayGround~~
